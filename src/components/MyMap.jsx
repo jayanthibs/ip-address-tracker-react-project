@@ -12,18 +12,22 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-function MyMap() {
+function MyMap({data}) {
+      const lat = data?.location?.lat ?? 40.7128;
+  const lng = data?.location?.lng ?? -74.0060;
+
   return (
     <MapContainer
-      center={[51.505, -0.09]}
+      center={[lat, lng]}
       zoom={13}
-      style={{ height: "500px", width: "100%" }}
+      className="h-[500px] w-full z-0"
+    //   style={{ height: "500px", width: "100%" }}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
       />
-      <Marker position={[51.505, -0.09]}>
+      <Marker position={[lat, lng]}>
         {/* <Popup>Hello from React Leaflet!</Popup> */}
       </Marker>
     </MapContainer>
