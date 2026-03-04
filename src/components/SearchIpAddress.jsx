@@ -17,7 +17,9 @@ function SearchIpAddress() {
     }`
   );
 
-  function handleClick() {
+  function handleSubmit(e) {
+    e.preventDefault();
+
     if (!searchData.trim()) return; // prevent empty search
     setIpToSearch(searchData);
   }
@@ -25,7 +27,7 @@ function SearchIpAddress() {
   return (
     <>
       {/* Search Section */}
-      <div
+      <form onSubmit={handleSubmit}
         className="bg-cover h-80 z-0"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
@@ -42,13 +44,13 @@ function SearchIpAddress() {
             onChange={(e) => setSearchData(e.target.value)}
           />
           <button
-            onClick={handleClick}
+            // onClick={handleClick}
             className="h-10 w-10 bg-black rounded-e-lg flex items-center justify-center"
           >
             <img alt="Arrow Icon" src={arrowIcon} className="h-5 w-5" />
           </button>
         </div>
-      </div>
+      </form>
 
       {/* Display IP Data */}
       {loading && <p className="text-center mt-4">Loading...</p>}
