@@ -4,30 +4,39 @@ import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import DisplayIpAddress from "./DisplayIpAddress";
 import MyMap from "./MyMap";
+import useValidateIPAddress from "../hooks/useValidateIPAddress";
 
 const key = import.meta.env.VITE_API_KEY;
 
 function SearchIpAddress() {
   const [searchData, setSearchData] = useState("");
   const [ipToSearch, setIpToSearch] = useState("");
+  const [validationError, setValidationError] = useState("");
 
   const { data, loading, error } = useFetch(
     `https://geo.ipify.org/api/v2/country,city?apiKey=${key}${
       ipToSearch ? `&ipAddress=${ipToSearch}` : ""
-    }`
+    }`,
   );
 
   function handleSubmit(e) {
     e.preventDefault();
+ const trimmedInput = searchData.trim();
+    const { errors, isValid } = useValidateIPAddress(trimmedInput);
+    setValidationError(errors);
 
-    if (!searchData.trim()) return; // prevent empty search
-    setIpToSearch(searchData);
+    if (!isValid) return; // prevent empty search
+    setIpToSearch(trimmedInput);
+setValidationError("");
+    setSearchData("");
+
   }
 
   return (
     <>
       {/* Search Section */}
-      <form onSubmit={handleSubmit}
+      <form
+        onSubmit={handleSubmit}
         className="bg-cover h-80 z-0"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
@@ -41,15 +50,22 @@ function SearchIpAddress() {
             type="search"
             id="searchIp"
             value={searchData}
-            onChange={(e) => setSearchData(e.target.value)}
+            onChange={(e) => {
+              setSearchData(e.target.value);
+              setValidationError("");
+            }}
           />
-          <button
-            // onClick={handleClick}
+
+          <button type="submit"
+            
             className="h-10 w-10 bg-black rounded-e-lg flex items-center justify-center"
           >
             <img alt="Arrow Icon" src={arrowIcon} className="h-5 w-5" />
           </button>
         </div>
+        {validationError && (
+          <p className="text-red-500 text-center mt-2 ">{validationError}</p>
+        )}
       </form>
 
       {/* Display IP Data */}
