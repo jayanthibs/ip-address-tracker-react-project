@@ -21,15 +21,15 @@ function SearchIpAddress() {
 
   function handleSubmit(e) {
     e.preventDefault();
- const trimmedInput = searchData.trim();
+    const trimmedInput = searchData.trim();
+
     const { errors, isValid } = useValidateIPAddress(trimmedInput);
     setValidationError(errors);
 
     if (!isValid) return; // prevent empty search
     setIpToSearch(trimmedInput);
-setValidationError("");
+    setValidationError("");
     setSearchData("");
-
   }
 
   return (
@@ -37,28 +37,31 @@ setValidationError("");
       {/* Search Section */}
       <form
         onSubmit={handleSubmit}
-        className="bg-cover h-80 z-0"
+        className="bg-cover h-70 z-0"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
-        <h1 className="text-center text-4xl mb-8 p-10">IP Address Tracker</h1>
+        <h1 className="text-center text-3xl  p-10 text-white font-semibold">
+          IP Address Tracker
+        </h1>
         <div className="flex justify-center">
           <label htmlFor="searchIp" className="sr-only">
             Search IP Address
           </label>
           <input
-            className="border w-full max-w-[400px] bg-white rounded-s-lg px-4"
+            className=" w-full max-w-md bg-white rounded-s-2xl px-6 py-3"
             type="search"
             id="searchIp"
             value={searchData}
+            placeholder="Search for any IP address or domain"
             onChange={(e) => {
               setSearchData(e.target.value);
               setValidationError("");
             }}
           />
 
-          <button type="submit"
-            
-            className="h-10 w-10 bg-black rounded-e-lg flex items-center justify-center"
+          <button
+            type="submit"
+            className="py-5 px-5 bg-black rounded-e-2xl flex items-center justify-center "
           >
             <img alt="Arrow Icon" src={arrowIcon} className="h-5 w-5" />
           </button>
