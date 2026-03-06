@@ -27,6 +27,7 @@ function SearchIpAddress() {
     const { errors, isValid } = useValidateIPAddress(trimmedInput);
     setValidationError(errors);
 
+    
     if (!isValid) return; // prevent empty search
     setIpToSearch(trimmedInput);
     setValidationError("");
