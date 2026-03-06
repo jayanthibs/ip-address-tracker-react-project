@@ -2,7 +2,9 @@
 
 A responsive React application that allows users to search for any IP address and view detailed location information along with an interactive map. The app fetches geolocation data from the Geo.IPify API and automatically shows the user’s current IP and location on initial load.
 
-## Live Demo:
+## Live Demo: https://ip-address-tracker-react-jayanthi.netlify.app/
+
+<img src="./src/assets/images/ip-address-tracker.jpg" width="500"/>
 
 ## Overview
 
