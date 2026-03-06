@@ -5,7 +5,7 @@ import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import DisplayIpAddress from "./DisplayIpAddress";
 import MyMap from "./MyMap";
-import useValidateIPAddress from "../hooks/useValidateIPAddress";
+import useValidateIpAddress from "../hooks/useValidateIpAddress";
 
 const key = import.meta.env.VITE_API_KEY;
 
@@ -24,10 +24,10 @@ function SearchIpAddress() {
     e.preventDefault();
     const trimmedInput = searchData.trim();
 
-    const { errors, isValid } = useValidateIPAddress(trimmedInput);
+    const { errors, isValid } = useValidateIpAddress(trimmedInput);
     setValidationError(errors);
 
-    
+
     if (!isValid) return; // prevent empty search
     setIpToSearch(trimmedInput);
     setValidationError("");
