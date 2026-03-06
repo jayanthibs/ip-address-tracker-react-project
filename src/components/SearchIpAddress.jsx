@@ -1,5 +1,6 @@
 import arrowIcon from "../assets/images/icon-arrow.svg";
-import bgImage from "../assets/images/pattern-bg-desktop.png";
+import bgDesktop from "../assets/images/pattern-bg-desktop.png";
+import bgMobile from "../assets/images/pattern-bg-mobile.png";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import DisplayIpAddress from "./DisplayIpAddress";
@@ -37,8 +38,11 @@ function SearchIpAddress() {
       {/* Search Section */}
       <form
         onSubmit={handleSubmit}
-        className="bg-cover h-70 z-0"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        className="bg-cover bg-center h-90 md:h-70 z-0"
+  style={{
+    backgroundImage:
+      window.innerWidth >= 768 ? `url(${bgDesktop})` : `url(${bgMobile})`,
+  }}
       >
         <h1 className="text-center text-3xl  p-10 text-white font-semibold">
           IP Address Tracker
