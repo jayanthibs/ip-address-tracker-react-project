@@ -1,19 +1,12 @@
-import MyMap from './components/MyMap'
-import './App.css'
-import "leaflet/dist/leaflet.css";
-import SearchIpAddress from './components/SearchIpAddress';
-import DisplayIpAddress from './components/DisplayIpAddress';
+import "./App.css";
+import SearchIpAddress from "./components/SearchIpAddress";
 
 function App() {
-  
-
   return (
-    <div >
-      <SearchIpAddress/>
-      <DisplayIpAddress/>
-      <MyMap/>
+    <div>
+      <SearchIpAddress />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

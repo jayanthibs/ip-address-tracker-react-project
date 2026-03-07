@@ -2,7 +2,7 @@
 
 A responsive React application that allows users to search for any IP address and view detailed location information along with an interactive map. The app fetches geolocation data from the Geo.IPify API and automatically shows the user’s current IP and location on initial load.
 
-## Live Demo: https://ip-address-tracker-react-jayanthi.netlify.app/
+## Live Demo link: https://ip-address-tracker-react-jayanthi.netlify.app/
 
 <img src="./src/assets/images/ip-address-tracker.jpg" width="500"/>
 
@@ -33,17 +33,22 @@ npm install
 npm run dev
 ````
 ## Features
-- Search for any IP address 
-- Display IP address, location, timezone, and ISP
-- Interactive map showing the IP location
-- Shows user's current IP and location on initial load
-- Input validation for IP address format
-- Loading and error handling
-- Responsive design
-- Clean, modular component-based architecture
+- Search for any IPv4 or IPv6 address
+- Display IP address information including:
+    - IP Address
+    - Location (City, Region, Postal Code)
+    - Timezone
+    - Internet Service Provider (ISP)
+- Interactive map displaying the IP location
+- Input validation for IPv4 and IPv6 addresses
+- Loading and error handling states
+- Responsive design for mobile, tablet, and desktop
+- Global state management using React Context API
+- Custom React hooks for reusable logic
 
 ## Built With
 - React
+- JavaScript (ES6+)
 - Vite
 - Tailwind CSS
 - React Leaflet
@@ -56,32 +61,44 @@ src/
 ├─ assets/
 │  └─ images/
 │     ├─ pattern-bg-desktop.png
-│     └─ pattern-bg-mobile.png
+│     ├─ pattern-bg-mobile.png
+│     └─ icon-location.svg
+│
 ├─ components/
 │  ├─ SearchIpAddress.jsx      # Main search input and form
 │  ├─ DisplayIpAddress.jsx     # Card showing IP, location, timezone, ISP
 │  └─ MyMap.jsx                # Interactive map component
+│
+├─ context/
+│  └─ IpContext.jsx            # React Context API for global IP data state
+│
 ├─ hooks/
 │  ├─ useFetch.js              # Custom hook for API fetching
-│  └─ useValidateIPAddress.js  # Custom hook for input validation
-├─ App.jsx
-└─ main.jsx
+│  └─ useValidateIpAddress.js  # Custom hook for input validation
+│
+├─ App.jsx                     # Root component
+└─ main.jsx                    # React application entry point
+
 ````
 ## How It Works
 
-- On initial load, the app fetches the user’s current IP address and location.
-- The user can enter any valid IP address in the search field.
-- Input is validated via a custom hook to ensure correct IP format.
-- The app requests data from the Geo.IPify API.
-- Results are displayed in the information card and plotted on the map.
+- The app loads and fetches the user's IP data automatically.
+- The Geo IPify API returns the IP address, location, timezone, and ISP.
+- The data is stored in global state using React Context API.
+- The DisplayIpAddress component shows the IP details.
+- The MyMap component displays the location on an interactive map.
+- Users can search for another IP address using the search bar.
+- The input is validated using the useValidateIpAddress hook.
+- If valid, the app fetches new data from the API.
+- The UI updates with the new IP information and map location.
 
 ## Key Concepts Demonstrated
 
-- Custom Hooks: useFetch and useValidateIPAddress
-- API Integration: Fetching geolocation data from Geo.IPify
-- State Management: Using React’s useState and useEffect
-- Responsive UI: Tailwind CSS layout with mobile, tablet, and desktop breakpoints
-- Map Integration: Displaying markers dynamically on a Leaflet map
+- Custom Hooks: useFetch for API data fetching and useValidateIpAddress for validating user input.
+- API Integration: Retrieving IP geolocation data from the Geo IPify API.
+- State Management: Managing global IP data using React Context API along with useState.
+- Responsive UI: Building a responsive layout with Tailwind CSS for mobile, tablet, and desktop screens.
+- Map Integration: Rendering an interactive map and dynamic marker using React Leaflet and Leaflet.
 
 ## Environment Variables
 
@@ -92,8 +109,8 @@ VITE_API_KEY=api_key_here
 
 ## Reflections
 
-During the development of the IP Address Tracker, I aimed to build a responsive React app that lets users search for any IP address and view detailed location information along with an interactive map. I structured the project into three main components: SearchIpAddress for handling input, DisplayIpAddress for showing IP details, and MyMap for the map. I also created custom hooks, useFetch for API requests and useValidateIPAddress for input validation, which kept the code modular and clean.
+During the development of the IP Address Tracker, I built a responsive React application that allows users to search for any IP address and view detailed information, including location, timezone, ISP, and an interactive map. The project is structured into three main components: SearchIpAddress for input and validation, DisplayIpAddress for showing IP details, and MyMap for rendering the map. I also created custom hooks: useFetch for API requests and useValidateIpAddress for validating IPv4 and IPv6 addresses, keeping the code modular and clean.
 
-One of the main challenges was handling layout and data fetching simultaneously. The information card initially overlapped the map on smaller screens due to absolute positioning, and I also needed to display the user’s current IP on initial load. I solved this by centering the card with left-1/2 -translate-x-1/2, adjusting the grid with grid-cols-1 lg:grid-cols-4, and fetching the user’s IP immediately when the app loads. Input validation prevented invalid IPs from triggering API calls, ensuring smooth functionality.
+A major challenge was managing layout and data fetching simultaneously, especially on smaller screens where the information card initially overlapped the map. I solved this using Tailwind CSS responsive grids and centering techniques (left-1/2 -translate-x-1/2). Another challenge was loading the user’s current IP on initial page load, which I addressed with React Context API, allowing global state management and smooth updates when new IPs are searched.
 
-Potential improvements include adding search history, saving favorite IPs, enhancing map interactivity, and implementing dark mode. Overall, the project strengthened my skills in React hooks, API integration, state management, and responsive UI design while teaching me practical techniques for building clean, user-friendly interfaces.
+Potential improvements include adding search history, favorite IPs, enhanced map interactivity, and dark mode. Overall, this project strengthened my skills in React hooks, Context API, API integration, and responsive design, while teaching practical techniques for building clean, user-friendly, and modular web applications.

@@ -1,24 +1,17 @@
 import arrowIcon from "../assets/images/icon-arrow.svg";
 import bgDesktop from "../assets/images/pattern-bg-desktop.png";
 import bgMobile from "../assets/images/pattern-bg-mobile.png";
-import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import DisplayIpAddress from "./DisplayIpAddress";
 import MyMap from "./MyMap";
 import useValidateIpAddress from "../hooks/useValidateIpAddress";
-
-const key = import.meta.env.VITE_API_KEY;
+import { useIpContext } from "../context/IpContext";
 
 function SearchIpAddress() {
   const [searchData, setSearchData] = useState("");
-  const [ipToSearch, setIpToSearch] = useState("");
   const [validationError, setValidationError] = useState("");
 
-  const { data, loading, error } = useFetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=${key}${
-      ipToSearch ? `&ipAddress=${ipToSearch}` : ""
-    }`,
-  );
+  const { data, loading, error, setIpToSearch } = useIpContext();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +19,6 @@ function SearchIpAddress() {
 
     const { errors, isValid } = useValidateIpAddress(trimmedInput);
     setValidationError(errors);
-
 
     if (!isValid) return; // prevent empty search
     setIpToSearch(trimmedInput);
@@ -45,15 +37,15 @@ function SearchIpAddress() {
             window.innerWidth >= 768 ? `url(${bgDesktop})` : `url(${bgMobile})`,
         }}
       >
-        <h1 className="text-center text-3xl  p-10 text-white font-semibold">
+        <h1 className="text-center text-3xl  md:text-4xl p-8 text-white font-semibold">
           IP Address Tracker
         </h1>
-        <div className="flex justify-center">
+        <div className="flex justify-center px-4">
           <label htmlFor="searchIp" className="sr-only">
             Search IP Address
           </label>
           <input
-            className=" w-full max-w-md bg-white rounded-s-2xl px-6 py-3"
+            className=" w-full max-w-md bg-white rounded-l-2xl px-4 py-3"
             type="search"
             id="searchIp"
             value={searchData}
@@ -66,9 +58,9 @@ function SearchIpAddress() {
 
           <button
             type="submit"
-            className="py-5 px-5 bg-black rounded-e-2xl flex items-center justify-center "
+            className=" px-5 bg-black rounded-r-2xl flex items-center justify-center "
           >
-            <img alt="Arrow Icon" src={arrowIcon} className="h-5 w-5" />
+            <img src={arrowIcon} alt="Arrow Icon" />
           </button>
         </div>
         {validationError && (
@@ -81,8 +73,8 @@ function SearchIpAddress() {
       {error && (
         <p className="text-center mt-4 text-red-500">Error fetching IP data.</p>
       )}
-      {data && <DisplayIpAddress data={data} />}
-      {data && <MyMap data={data} />}
+      {data && <DisplayIpAddress />}
+      {data && <MyMap />}
     </>
   );
 }
