@@ -108,6 +108,7 @@ VITE_API_KEY=api_key_here
 ````
 
 ## Deployment
+
 - The app is deployed on Netlify.
 - To deploy:
     - Push the project to GitHub.
