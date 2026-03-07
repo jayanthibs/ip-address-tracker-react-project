@@ -80,6 +80,7 @@ src/
 └─ main.jsx                    # React application entry point
 
 ````
+
 ## How It Works
 
 - The app loads and fetches the user's IP data automatically.
