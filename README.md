@@ -107,6 +107,16 @@ Create a .env file in the root directory and add the Geo.IPify API key:
 VITE_API_KEY=api_key_here
 ````
 
+## Deployment
+- The app is deployed on Netlify.
+- To deploy:
+    - Push the project to GitHub.
+    - In Netlify, click New site from Git and connect the repo.
+    - Set the build command: npm run build
+    - Set the publish directory: dist
+    - Click Deploy site.
+- Netlify will automatically build and host the app, and future commits will trigger updates.
+
 ## Reflections
 
 During the development of the IP Address Tracker, I built a responsive React application that allows users to search for any IP address and view detailed information, including location, timezone, ISP, and an interactive map. The project is structured into three main components: SearchIpAddress for input and validation, DisplayIpAddress for showing IP details, and MyMap for rendering the map. I also created custom hooks: useFetch for API requests and useValidateIpAddress for validating IPv4 and IPv6 addresses, keeping the code modular and clean.
